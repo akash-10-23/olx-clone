@@ -39,7 +39,7 @@ function Navbar() {
                         </span>
                     </div>
                 {/* </Link> */}
-                <div className="headerOption last">
+                    <div className="headerOption last">
                         <AccountCircleIcon className='myAccount'/>
                         <span className="OptionLineTwo">
                              My Account
@@ -47,7 +47,6 @@ function Navbar() {
                         
                     </div>
 
-                
             </div>
             
         </div>
