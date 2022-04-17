@@ -2,6 +2,7 @@
 import React from 'react';
 import "../css/ForSale.css";
 import AddItem from './AddItem';
+import SaleItem from './SaleItem';
 
 function ForSale() {
 
@@ -33,6 +34,32 @@ function ForSale() {
                             rating={item.rating}
                         />
                     ))} */}
+                    <div className='allItems'>
+                        <SaleItem 
+                            id="1234445"
+                            name="IPhone"
+                            price={88900}
+                            status="Unsold"
+                            image="https://apollo-singapore.akamaized.net/v1/files/os3n0dhmd6gn3-IN/image;s=780x0;q=60"
+                        />
+
+                        <SaleItem 
+                            id="1234445"
+                            name="IPhone"
+                            price={88900}
+                            status="Sold"
+                            image="https://apollo-singapore.akamaized.net/v1/files/os3n0dhmd6gn3-IN/image;s=780x0;q=60"
+                        />
+
+                        {/* <SaleItem 
+                            id="1234445"
+                            name="IPhone"
+                            price={88900}
+                            status="Sold"
+                            image="https://apollo-singapore.akamaized.net/v1/files/os3n0dhmd6gn3-IN/image;s=780x0;q=60"
+                        /> */}
+                    </div>
+                    
                     
                 </div>
                 
