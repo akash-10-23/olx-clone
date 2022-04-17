@@ -3,7 +3,7 @@ import "../css/Item.css";
 
 function Item(props) {
 
-    const { id, name, price, status, image } = props;
+    const { id, name, price,image } = props;
     return (
         <div className="product">
             <img

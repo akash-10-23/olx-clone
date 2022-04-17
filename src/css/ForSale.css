@@ -1,0 +1,20 @@
+.forSale {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: white;
+    height: max-content;
+}
+
+.forSaleAd {
+    width: 100%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    max-height: 275px;
+}
+
+.forSaleTitle {
+    margin-right: 10px;
+    padding: 20px;
+    border-bottom: 1px solid lightgrey;
+}

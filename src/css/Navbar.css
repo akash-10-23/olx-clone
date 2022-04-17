@@ -6,6 +6,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    padding-bottom: 3px;
 }
 
 .headLogo {
@@ -13,12 +14,12 @@
     object-fit: contain;
     margin: 0px 20px;
     margin-top: 2px;
-    margin-right: 10%;
-    cursor: pointer;
+    padding-top: 7px;
 }
 
 .headerSearch {
-    padding-top: 7px;
+    /* padding-top: 7px;
+    padding-left: 10px; */
     display: flex;
     flex: 1;
     align-items: center;
@@ -43,8 +44,7 @@
 
 .headerNav {
     display: flex;
-    flex: 1;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .headerOption {
@@ -52,7 +52,6 @@
     flex-direction: column;
     margin-left: 10px;
     margin-right: 10px;
-    cursor: pointer;
 }
 
 .OptionLineTwo {
