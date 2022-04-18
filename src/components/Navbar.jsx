@@ -34,7 +34,7 @@ function Navbar() {
                 </Link>
                     
 
-                {/* <Link to={!user && "/login"}> */}
+                <Link style={{ textDecoration: 'none' , color: 'black'}} to="/login"> 
                     <div  className="headerOption">
                         <span className="OptionLineOne">
                             Sign 
@@ -43,7 +43,7 @@ function Navbar() {
                             In
                         </span>
                     </div>
-                {/* </Link> */}
+                </Link> 
                     <div className="headerOption last">
                         <AccountCircleIcon className='myAccount'/>
                         <span className="OptionLineTwo">

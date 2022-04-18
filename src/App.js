@@ -3,20 +3,29 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ForSale from './components/ForSale';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
 
 function App() {
   return (
     <Router>
       <div className="App">
         
-      <Navbar />
+      
         <Routes>
           
+          {/* User registeration */}
+          <Route path='/signup' element={<SignUp />} />
+          
+          {/* User Login */}
+          <Route path='/login' element={<Login />} />
+          
           {/* Items for Sale */}
-          <Route path='/forsale' element={ <ForSale/>}/>
+          <Route path='/forsale' element={<><Navbar /><ForSale /></>}/>
 
           {/* Home Page */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={
+            <><Navbar /><Home /></>} />
         </Routes>
         
       </div>
