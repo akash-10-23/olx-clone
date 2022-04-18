@@ -4,7 +4,7 @@ import "../css/AddItem.css";
 function AddItem() {
     return (
         <div className='addItem'>
-            <h4>Add New Item for Sale</h4>
+            <h3>Add New Item for Sale</h3>
             <form method='POST'>
                 <div class="form-group">
                     <label for="itemName">Item Name</label>
@@ -14,7 +14,7 @@ function AddItem() {
                     <input type="text" class="form-control" name="itemPrice" autocomplete="off" />
                 </div>
             </form>
-            <button>Add for Sale</button>
+            <button className='addBtn'>Add for Sale</button>
         </div>
     )
 }
