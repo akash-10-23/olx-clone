@@ -74,14 +74,19 @@ app.post("/login", (req, res, next) => {
       if (!user) res.send("No User Exists");
       else {
         req.logIn(user, (err) => {
-          if (err) throw err;
-          res.send("Successfully Authenticated");
-          console.log(req.user);
+            if (err) throw err;
+            res.send(req.user.username);
+            console.log("Successfully Authenticated");
         });
       }
     })(req, res, next);
-  });
-
+});
+  
+app.get("/logout", (req, res) => {
+    req.logOut();
+    res.send("User Logged Out");
+    res.redirect("/");
+})
 //Listen command
 app.listen(8080, function () {
     console.log("Server started on port 8080");

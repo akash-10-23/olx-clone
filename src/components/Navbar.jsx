@@ -3,8 +3,33 @@ import "../css/Navbar.css";
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
+import { useStateValue } from "../StateProvider";
+import Axios  from "axios";
 
 function Navbar() {
+
+    const [{ items, username }, dispatch] = useStateValue();
+
+    const handleAuthentication = () => {
+        if (username) {
+            Axios({
+                method: "GET",
+                withCredentials: true,
+                url: "http://localhost:8080/logout",
+              }).then((res) => {
+                  console.log(res);
+                  dispatch({
+                      type: "SET_USER",
+                      username: null
+                  });
+              });
+        }
+    }
+
+    let uname = "Guest"
+    if (username) {
+        uname = username.substring(0, username.indexOf("@"));
+    }
 
     return (
         <div className="header">
@@ -35,13 +60,13 @@ function Navbar() {
                 </Link>
                     
 
-                <Link style={{ textDecoration: 'none' , color: 'black'}} to="/login"> 
-                    <div  className="headerOption">
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={!username && "/login"}> 
+                    <div onClick={handleAuthentication} className="headerOption">
                         <span className="OptionLineOne">
-                            Hello User
+                            Hello {uname}
                         </span>
                         <span className="OptionLineTwo">
-                            Sign In
+                            {username ? "Sign Out" : "Sign In"}
                         </span>
                     </div>
                 </Link> 

@@ -2,13 +2,15 @@ import {React,useState} from "react";
 import "../css/SignUp.css";
 import { Link ,useNavigate} from 'react-router-dom';
 import Axios  from "axios";
+import { useStateValue } from "../StateProvider";
 
 function Login(){
-
     const navigate = useNavigate();
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
 
+    const [{ items,username },dispatch] = useStateValue();
+    
     const login = async (e) => {
         e.preventDefault();
 
@@ -22,6 +24,10 @@ function Login(){
           url: "http://localhost:8080/login",
         }).then((res) => {
             console.log(res);
+            dispatch({
+                type: "SET_USER",
+                username: res.data
+            });
             navigate("/");
         });
     };
