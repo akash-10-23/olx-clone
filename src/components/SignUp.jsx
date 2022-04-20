@@ -1,8 +1,30 @@
-import React from "react";
+import { React, useState } from "react";
 import "../css/SignUp.css";
-import { Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import  Axios  from "axios";
 
 function SignUp() {
+    const navigate = useNavigate();
+    const [registerUsername, setRegisterUsername] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+    
+    const register = async (e) => {
+        e.preventDefault();
+        
+        Axios({
+            method: "POST",
+            data: {
+                username: registerUsername,
+                password: registerPassword,
+            },
+            withCredentials: true,
+            url: "http://localhost:8080/register",
+        }).then((res) => {
+            console.log(res);
+            navigate("/login");
+        });
+        
+    };
 
     return (
         <div className="auth-wrapper">
@@ -14,27 +36,38 @@ function SignUp() {
                     alt='logo'
                 />
             </Link>
-                <form className="signUpForm">
+                <form method="POST" className="signUpForm" onSubmit={register}>
                     <h3>Sign Up</h3>
-                    <div className="form-group">
-                        <label>First name</label>
-                        <input type="text" className="form-control" placeholder="First name" />
-                    </div>
-                    <div className="form-group">
-                        <label>Last name</label>
-                        <input type="text" className="form-control" placeholder="Last name" />
-                    </div>
+                    
                     <div className="form-group">
                         <label>Email address</label>
-                        <input type="email" className="form-control" placeholder="Enter email" />
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Enter email" 
+                            // name="email"
+                            value={registerUsername}
+                            onChange={e => setRegisterUsername( e.target.value)}
+                            />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input type="password" className="form-control" placeholder="Enter password" />
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Enter password"
+                            // name="password"
+                            value={registerPassword}
+                            onChange={e => setRegisterPassword( e.target.value)}
+                        />
                     </div>
-                    <button type="submit" className="submitBtn">Sign Up</button>
+                    <button className="submitBtn">Sign Up</button>
                     <p className="forgot-password text-right">
                         Already registered? <a href="/login">Sign in</a>
+                    </p>
+                    <p className="policy">
+                        By signing-in you agree to the OLX FAKE CLONE Conditions of Use & Sale. Please
+                        see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
                     </p>
                 </form>
             </div>

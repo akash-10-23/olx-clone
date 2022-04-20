@@ -125,3 +125,8 @@ label {
 .submitBtn:hover{
     opacity: 0.8;
 }
+
+.policy {
+  margin-top: 15px;
+  font-size: 12px;
+}

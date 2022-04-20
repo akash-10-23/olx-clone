@@ -5,6 +5,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+
     return (
         <div className="header">
         
@@ -37,10 +38,10 @@ function Navbar() {
                 <Link style={{ textDecoration: 'none' , color: 'black'}} to="/login"> 
                     <div  className="headerOption">
                         <span className="OptionLineOne">
-                            Sign 
+                            Hello User
                         </span>
                         <span className="OptionLineTwo">
-                            In
+                            Sign In
                         </span>
                     </div>
                 </Link> 

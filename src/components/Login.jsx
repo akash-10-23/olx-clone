@@ -1,9 +1,31 @@
-import React from "react";
+import {React,useState} from "react";
 import "../css/SignUp.css";
-import { Link} from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
+import Axios  from "axios";
 
 function Login(){
 
+    const navigate = useNavigate();
+    const [loginUsername, setLoginUsername] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+
+    const login = async (e) => {
+        e.preventDefault();
+
+        Axios({
+          method: "POST",
+          data: {
+            username: loginUsername,
+            password: loginPassword,
+          },
+          withCredentials: true,
+          url: "http://localhost:8080/login",
+        }).then((res) => {
+            console.log(res);
+            navigate("/");
+        });
+    };
+    
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
@@ -14,26 +36,40 @@ function Login(){
                     alt='logo'
                 />
             </Link>
-            <form className="signUpForm">
+            <form method="POST" className="signUpForm" onSubmit={login}>
                 <h3>Sign In</h3>
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Enter email" 
+                            // name="email"
+                            value={loginUsername}
+                            onChange={(e) => setLoginUsername(e.target.value)}
+                        />
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Enter password"
+                            value={loginPassword}
+                            onChange={(e) => setLoginPassword(e.target.value)}
+                        />
                 </div>
-                {/* <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
-                </div> */}
-                <button type="submit" className="submitBtn">Submit</button>
+
+                <button className="submitBtn" >Submit</button>
                 <p className="forgot-password text-right">
                         New User? <a href="/signup">Register</a>
                 </p>
+            
+                <p className="policy">
+                    By signing-in you agree to the OLX FAKE CLONE Conditions of Use & Sale. Please
+                    see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
+                </p>
+                    
             </form>
             </div>
         </div>
