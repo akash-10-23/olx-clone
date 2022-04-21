@@ -1,4 +1,4 @@
-.forSale {
+.myAccount {
     display: flex;
     justify-content: space-between;
     padding: 20px;
@@ -6,14 +6,18 @@
     height: max-content;
 }
 
-.forSaleAd {
+.myAccountLeft {
+    margin-right: 5%;
+}
+
+.myAccountAd {
     width: 100%;
     margin-left: 5%;
     margin-bottom: 10px;
     max-height: 275px;
 }
 
-.forSaleTitle {
+.myAccountTitle {
     margin-right: 10px;
     padding: 20px;
     border-bottom: 1px solid lightgrey;
@@ -21,6 +25,7 @@
 
 .allItems{
     display: flex;
+    flex-direction: column;
 }
 
 button {
@@ -34,4 +39,9 @@ button {
     border-radius: 5px;
     font-weight: bold;
     align-items: center;
+}
+
+#purchase {
+    float: right;
+    position: relative;
 }

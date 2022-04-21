@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import "../css/ForSale.css";
+import React from 'react';
+import "../css/MyAccount.css";
 import AddItem from './AddItem';
 import SaleItem from './SaleItem';
 import Axios  from "axios";
 import { useStateValue } from "../StateProvider";
 
-function ForSale() {
+function MyAccount() {
 
     const [{ items, username }, dispatch] = useStateValue();
     let uname;
@@ -28,12 +28,28 @@ function ForSale() {
         });
         console.log(items);
     }
+
+    const handlePurchase = (e) => {
+        e.preventDefault();
+
+        Axios({
+            method: "GET",
+            withCredentials: true,
+            url:`http://localhost:8080/purchaseList?username=${username}`
+        }).then(res => {
+            dispatch({
+                type: "ALL_ITEMS",
+                items: res.data
+            });
+            console.log("Items Fetched Successfully");
+        });
+    }
     
     return (
-        <div className='forSale'>
-            <div className='forSaleLeft'>
+        <div className='myAccount'>
+            <div className='myAccountLeft'>
                 <img
-                    className='forSaleAd'
+                    className='myAccountAd'
                     src='https://miro.medium.com/max/1400/1*O5qWMAAL5Gf--nsrjL8Q9w.jpeg'
                     alt='Ad' 
                 />
@@ -42,11 +58,11 @@ function ForSale() {
                     <h3>Hello {uname},</h3>
                     
                     <form method="GET" onSubmit={handleList}>
-                        <h2 className='forSaleTitle'>Your List</h2>
-                        <button type='submit'>Get your list</button>
-                    </form>
+                        <h2 className='myAccountTitle'>Your List</h2>
+                        <button type='submit'>For Sale Items</button>
 
-                    
+                        <button onClick={handlePurchase} id='purchase'>Purchsed Items </button>
+                    </form>
 
                     <div className='allItems'>
                         {items.map(item => (
@@ -64,11 +80,11 @@ function ForSale() {
                 
             </div>
 
-            <div className='forSaleRight'>
+            <div className='myAccountRight'>
                 <AddItem />
             </div>
         </div>
     )
 }
 
-export default ForSale;
+export default MyAccount;

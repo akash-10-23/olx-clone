@@ -2,16 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
-// const passportLocalMongoose = require("passport-local-mongoose");
-const passportLocal = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
-const findOrCreate = require("mongoose-findorcreate");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const User = require("./user");
 const Item = require("./item");
+const Purchase = require("./purchase");
 
 const app = express();
 
@@ -50,6 +48,16 @@ require("./passportConfig")(passport);
 // Routes ----------------------------------------------------------------
 app.get("/", function (req, res) {
     res.send("Hello From Backend!!!");    
+});
+
+app.get("/home", (req, res) => {
+  Item.find({ status: "Unsold" }, (err, items) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else
+      res.send(items);
+  });
 });
 
 app.post("/register", (req, res) => {
@@ -101,7 +109,6 @@ app.get("/forsale", (req, res) => {
   });
 });
 
-
 app.post("/additem", (req, res) => {
   const item = new Item({
     username: req.body.username,
@@ -118,6 +125,44 @@ app.post("/additem", (req, res) => {
       res.send(result);
     }
   });
+});
+
+app.get("/purchaseList", (req, res) => {
+  const bname = req.query.username;
+
+  Purchase.find({ buyer: bname }, (err, items) => {
+    if (err)
+      console.log(err);
+    else 
+      res.send(items);
+  });
+});
+
+app.post("/purchase", (req, res) => {
+  const purchase = new Purchase({
+    buyer: req.body.buyer,
+    name: req.body.name,
+    price: req.body.price,
+    imgLink: req.body.imgLink
+  });
+
+  Purchase.create(purchase, (err, result) => {
+    if (err)
+      console.log(err);
+    else {
+      Item.findOneAndUpdate(
+        { name: purchase.name },
+        { $set: { status: "Sold" } },
+        (err, resultt) => {
+          if (err)
+            res.send(err)
+          else
+            res.send(resultt);
+      });
+    }
+    
+  });
+  
 });
 
 

@@ -1,5 +1,6 @@
 export const initialState = {
     items: [],
+    homeItems: [],
     username:null
 };
 
@@ -15,6 +16,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 items: action.items
+            };
+        
+        case "HOME_ITEMS":
+            return {
+                ...state,
+                homeItems:action.homeItems
             };
         
         default:

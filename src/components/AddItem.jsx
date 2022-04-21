@@ -24,6 +24,8 @@ function AddItem() {
           }).then((res) => {
               console.log(res);     
           });
+        
+        setItemDetails({name: "", price:0, imgLink:""});
     }
 
     return (

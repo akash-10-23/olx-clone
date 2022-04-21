@@ -2,7 +2,7 @@ import './App.css';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ForSale from './components/ForSale';
+import MyAccount from './components/MyAccount';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 
@@ -21,11 +21,25 @@ function App() {
           <Route path='/login' element={<Login />} />
           
           {/* Items for Sale */}
-          <Route path='/forsale' element={<><Navbar /><ForSale /></>}/>
+          <Route
+            path='/myaccount'
+            element={
+              <>
+                <Navbar />
+                <MyAccount />
+              </>
+            } 
+          />
 
           {/* Home Page */}
-          <Route path="/" element={
-            <><Navbar /><Home /></>} />
+          <Route path="/"
+            element={
+              <>
+                <Navbar />
+                <Home />
+              </>
+            }   
+          />
         </Routes>
         
       </div>

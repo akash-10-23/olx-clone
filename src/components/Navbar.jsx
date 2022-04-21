@@ -2,13 +2,14 @@ import React from 'react';
 import "../css/Navbar.css";
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStateValue } from "../StateProvider";
 import Axios  from "axios";
 
 function Navbar() {
 
     const [{ items, username }, dispatch] = useStateValue();
+    const navigate = useNavigate();
 
     const handleAuthentication = () => {
         if (username) {
@@ -22,6 +23,7 @@ function Navbar() {
                       type: "SET_USER",
                       username: null
                   });
+                  navigate("/");
               });
         }
     }
@@ -54,17 +56,6 @@ function Navbar() {
             </div>
 
             <div className="headerNav">
-                <Link style={{ textDecoration: 'none', color: 'black' }} to={(username != null) && "/forsale"}>
-                    <div onClick={handleForSale} className="headerOption">
-                        <span className="OptionLineOne">
-                            Items 
-                        </span>
-                        <span className="OptionLineTwo">
-                            For Sale
-                        </span>
-                    </div>
-                </Link>
-                    
 
                 <Link style={{ textDecoration: 'none', color: 'black' }} to={!username && "/login"}> 
                     <div onClick={handleAuthentication} className="headerOption">
@@ -72,17 +63,23 @@ function Navbar() {
                             Hello {uname}
                         </span>
                         <span className="OptionLineTwo">
-                            {username ? "Sign Out" : "Sign In"}
+                            {username ?
+                                <Link style={{ textDecoration: 'none', color: 'black' }} to="/">
+                                  Sign Out
+                                </Link> : "Sign In"}
                         </span>
                     </div>
                 </Link> 
-                    <div className="headerOption last">
-                        <AccountCircleIcon className='myAccount'/>
+
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={(username != null) && "/myaccount"}>
+                    <div onClick={handleForSale} className="headerOption last">
+                        <AccountCircleIcon className='accountIcon'/>
                         <span className="OptionLineTwo">
                              My Account
                         </span>
-                        
                     </div>
+                </Link>
+
 
             </div>
             
