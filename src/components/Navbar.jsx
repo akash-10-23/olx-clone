@@ -26,7 +26,13 @@ function Navbar() {
         }
     }
 
-    let uname = "Guest"
+    const handleForSale = () => {
+        if (!username) {
+            alert("Please Login First");
+        }
+    }
+
+    let uname = "Guest";
     if (username) {
         uname = username.substring(0, username.indexOf("@"));
     }
@@ -48,8 +54,8 @@ function Navbar() {
             </div>
 
             <div className="headerNav">
-                <Link style={{ textDecoration: 'none' , color: 'black'}} to="/forsale">
-                    <div  className="headerOption">
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={(username != null) && "/forsale"}>
+                    <div onClick={handleForSale} className="headerOption">
                         <span className="OptionLineOne">
                             Items 
                         </span>

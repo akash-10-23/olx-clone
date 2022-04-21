@@ -1,17 +1,34 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../css/ForSale.css";
 import AddItem from './AddItem';
 import SaleItem from './SaleItem';
+import Axios  from "axios";
+import { useStateValue } from "../StateProvider";
 
 function ForSale() {
 
-    // const [{ cart, user }, dispatch] = useStateValue();
-    // let uname = "Guest";
-    // if (user) {
-    //     uname = user.email.substring(0, user.email.indexOf("@"));
-    // }
+    const [{ items, username }, dispatch] = useStateValue();
+    let uname;
+    if (username) {
+        uname = username.substring(0, username.indexOf("@"));
+    }  
+    
+    const handleList = (e) => {
+        e.preventDefault();
 
+        Axios({
+            method: "GET",
+            withCredentials: true,
+            url:`http://localhost:8080/forsale?username=${username}`
+        }).then(res => {
+            dispatch({
+                type: "ALL_ITEMS",
+                items: res.data
+            });
+        });
+        console.log(items);
+    }
+    
     return (
         <div className='forSale'>
             <div className='forSaleLeft'>
@@ -22,44 +39,26 @@ function ForSale() {
                 />
 
                 <div>
-                    <h3>Hello Guest,</h3>
-                    <h2 className='forSaleTitle'>Your List</h2>
-
-                    {/* {cart.map(item => (
-                        <CheckoutProduct 
-                            id={item.id}
-                            title={item.title}
-                            image={item.image}
-                            price={item.price}
-                            rating={item.rating}
-                        />
-                    ))} */}
-                    <div className='allItems'>
-                        <SaleItem 
-                            id="1234445"
-                            name="IPhone"
-                            price={88900}
-                            status="Unsold"
-                            image="https://apollo-singapore.akamaized.net/v1/files/os3n0dhmd6gn3-IN/image;s=780x0;q=60"
-                        />
-
-                        <SaleItem 
-                            id="1234445"
-                            name="IPhone"
-                            price={88900}
-                            status="Sold"
-                            image="https://apollo-singapore.akamaized.net/v1/files/os3n0dhmd6gn3-IN/image;s=780x0;q=60"
-                        />
-
-                        {/* <SaleItem 
-                            id="1234445"
-                            name="IPhone"
-                            price={88900}
-                            status="Sold"
-                            image="https://apollo-singapore.akamaized.net/v1/files/os3n0dhmd6gn3-IN/image;s=780x0;q=60"
-                        /> */}
-                    </div>
+                    <h3>Hello {uname},</h3>
                     
+                    <form method="GET" onSubmit={handleList}>
+                        <h2 className='forSaleTitle'>Your List</h2>
+                        <button type='submit'>Get your list</button>
+                    </form>
+
+                    
+
+                    <div className='allItems'>
+                        {items.map(item => (
+                            <SaleItem
+                                id={item._id}
+                                name={item.name}
+                                price={item.price}
+                                status={item.status}
+                                image={item.imgLink}
+                            />
+                        ))}
+                    </div>
                     
                 </div>
                 

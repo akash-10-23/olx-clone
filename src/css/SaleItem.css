@@ -1,12 +1,11 @@
 .saleItem {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     max-width: 40%;
     background-color: antiquewhite;
     border-radius: 10px;
     padding: 1%;
     margin: 2%;
-    flex-wrap: wrap;
 }
 
 .saleItemInfo {
@@ -14,13 +13,14 @@
     flex-direction: column;
     justify-content: space-around;
     padding-left: 20px;
-    align-items: center;
+    align-items: left;
 }
 
 .saleItemImage {
     object-fit: contain;
     width: 120px;
-    height: 180px;
+    height: 120px;
+    padding: 3%;
 }
 
 .saleItemPrice{
@@ -30,7 +30,7 @@
 }
 
 .saleItemName {
-    font-weight: lighter;
+    font-weight: 300;
 }
 
 .status {

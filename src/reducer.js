@@ -11,6 +11,11 @@ const reducer = (state, action) => {
                 ...state,
                 username: action.username
             };
+        case "ALL_ITEMS":
+            return {
+                ...state,
+                items: action.items
+            };
         
         default:
             return state;

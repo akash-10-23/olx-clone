@@ -24,11 +24,17 @@ function Login(){
           url: "http://localhost:8080/login",
         }).then((res) => {
             console.log(res);
-            dispatch({
-                type: "SET_USER",
-                username: res.data
-            });
-            navigate("/");
+            
+            if (res.data === "No User Exists")
+                alert(res.data);
+            else {
+                dispatch({
+                    type: "SET_USER",
+                    username: res.data
+                });
+                navigate("/");
+            }
+                
         });
     };
     

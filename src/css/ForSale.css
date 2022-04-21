@@ -22,3 +22,16 @@
 .allItems{
     display: flex;
 }
+
+button {
+    background: #0ac5da;
+    width: 35%;
+    height: 32px;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: #002f34;
+    color: #111;
+    border-radius: 5px;
+    font-weight: bold;
+    align-items: center;
+}

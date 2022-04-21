@@ -15,7 +15,7 @@ function SaleItem(props) {
             
             <div className='saleItemInfo'>
                 <div className='saleItemPrice'>
-                    ₹{price}
+                    ₹ {price}
                     <div className='saleItemName'>{name}</div>
                 </div>
                 

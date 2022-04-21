@@ -11,6 +11,7 @@ const findOrCreate = require("mongoose-findorcreate");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const User = require("./user");
+const Item = require("./item");
 
 const app = express();
 
@@ -85,9 +86,42 @@ app.post("/login", (req, res, next) => {
 app.get("/logout", (req, res) => {
     req.logOut();
     res.send("User Logged Out");
-    res.redirect("/");
+    // res.redirect("/");
 })
-//Listen command
+
+app.get("/forsale", (req, res) => { 
+  const uname = req.query.username;
+
+  Item.find({ username: uname }, (err, items) => {
+    if (err)
+      console.log(err);
+    else {
+      res.send(items);
+    }
+  });
+});
+
+
+app.post("/additem", (req, res) => {
+  const item = new Item({
+    username: req.body.username,
+    name: req.body.name,
+    price: req.body.price,
+    imgLink: req.body.imgLink,
+    status: "Unsold"
+  });  
+
+  Item.create(item, (err, result) => {
+    if (err)
+      console.log(err);
+    else {
+      res.send(result);
+    }
+  });
+});
+
+
+//Listen command--------------------------------------------------------------
 app.listen(8080, function () {
     console.log("Server started on port 8080");
 });

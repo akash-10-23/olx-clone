@@ -21,7 +21,13 @@ function SignUp() {
             url: "http://localhost:8080/register",
         }).then((res) => {
             console.log(res);
-            navigate("/login");
+            if (res.data === "User Already Exists")
+                alert("User Already Exists");
+            else {
+                alert(res.data);
+                navigate("/login");
+            }
+                
         });
         
     };
